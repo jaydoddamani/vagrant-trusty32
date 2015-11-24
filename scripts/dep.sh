@@ -26,7 +26,7 @@ apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql
 # Adding the apache user to the vagrant group, so /vagrant can be the docroot
 adduser www-data vagrant
 
-# Adding /vagrant as docroot
+# Adding /vagrant as default virtual host
 cat <<EOF > /etc/apache2/sites-available/vagrant.conf
 
 <VirtualHost *:80>
@@ -46,3 +46,6 @@ EOF
 rm -rf /etc/apache2/sites-enabled/*
 
 ln -s /etc/apache2/sites-available/vagrant.conf /etc/apache2/sites-enabled/vagrant.conf
+
+# Installing composer
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
