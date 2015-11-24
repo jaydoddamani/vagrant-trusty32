@@ -47,5 +47,9 @@ rm -rf /etc/apache2/sites-enabled/*
 
 ln -s /etc/apache2/sites-available/vagrant.conf /etc/apache2/sites-enabled/vagrant.conf
 
+a2enmod rewrite
+
+service apache2 restart
+
 # Installing composer
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
