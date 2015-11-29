@@ -15,7 +15,7 @@ add-apt-repository ppa:ondrej/php5-5.6
 
 # Repo update and package upgrade
 apt-get -y update
-apt-get -y ugrade
+apt-get -y upgrade
 
 # Setting MySQL root password to empty string
 export DEBIAN_FRONTEND="noninteractive"
@@ -50,6 +50,17 @@ ln -s /etc/apache2/sites-available/vagrant.conf /etc/apache2/sites-enabled/vagra
 a2enmod rewrite
 
 service apache2 restart
+
+# Exposing MySQL to be accessible from the outside
+
+cat <<EOF > /etc/mysql/conf.d/vagrant.cnf
+[mysqld]
+
+bind-address    = 0.0.0.0
+
+EOF
+
+service mysql restart
 
 # Installing composer
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
