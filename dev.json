@@ -13,24 +13,6 @@
             "preseed/*"
         ]
     },
-    "provisioners": [
-        {
-            "type": "shell",
-            "scripts": [
-                "scripts/base.sh",
-                "scripts/vagrant.sh",
-                "scripts/virtualbox.sh",
-                "scripts/dep.sh",
-                "scripts/cleanup.sh",
-                "scripts/zerodisk.sh"
-            ],
-            "override": {
-                "virtualbox-iso": {
-                    "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
-                }
-            }
-        }
-    ],
     "builders": [
         {
             "type": "virtualbox-iso",
@@ -63,6 +45,24 @@
                 ["modifyvm", "{{.Name}}", "--cpus", "2"],
                 ["modifyvm", "{{.Name}}", "--memory", "1024"]
             ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/base.sh",
+                "scripts/vagrant.sh",
+                "scripts/virtualbox.sh",
+                "scripts/dep.sh",
+                "scripts/cleanup.sh",
+                "scripts/zerodisk.sh"
+            ],
+            "override": {
+                "virtualbox-iso": {
+                    "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
+                }
+            }
         }
     ],
     "post-processors": [
