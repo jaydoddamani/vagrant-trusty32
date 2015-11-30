@@ -38,8 +38,8 @@ cat <<EOF > /etc/apache2/sites-available/vagrant.conf
         allow from all
         Require all granted
     </Directory>
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog \$APACHE_LOG_DIR/error.log
+    CustomLog \$APACHE_LOG_DIR/access.log combined
 </VirtualHost>
 EOF
 
