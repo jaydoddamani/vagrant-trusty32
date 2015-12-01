@@ -21,7 +21,16 @@ apt-get -y upgrade
 export DEBIAN_FRONTEND="noninteractive"
 
 # Installing all the fun things
-apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl
+apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug
+
+# Adding some default config for xdebug
+cat <<EOF >> /etc/php5/mods-available/xdebug.ini
+xdebug.max_nesting_level = 400
+xdebug.remote_enable=on
+xdebug.remote_connect_back=on
+html_errors=1
+xdebug.extended_info=1
+EOF
 
 # Adding the apache user to the vagrant group, so /vagrant can be the docroot
 adduser www-data vagrant
