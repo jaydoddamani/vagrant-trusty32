@@ -72,4 +72,30 @@ EOF
 service mysql restart
 
 # Installing composer
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer.phar
+
+# Creating a custom php.ini for composer, without xdebug
+mkdir /etc/php5/composer
+
+cp -R /etc/php5/cli/* /etc/php5/composer
+
+rm -f /etc/php5/composer/conf.d/20-xdebug.ini
+
+# Creating a composer executable
+cat <<EOF > /usr/local/bin/composer
+#!/usr/bin/env bash
+
+phprc=\${PHPRC}
+phppath=\${PHP_INI_SCAN_DIR}
+
+export PHPRC=/etc/php5/composer
+export PHP_INI_SCAN_DIR=/etc/php5/composer/conf.d
+
+/usr/local/bin/composer.phar "\$@"
+
+export PHPRC=\${phprc}
+export PHP_INI_SCAN_DIR=\${phppath}
+
+EOF
+
+chmod 755 /usr/local/bin/composer
