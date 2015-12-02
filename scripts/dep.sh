@@ -21,7 +21,7 @@ apt-get -y upgrade
 export DEBIAN_FRONTEND="noninteractive"
 
 # Installing all the fun things
-apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug
+apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug php5-gd
 
 # Adding some default config for xdebug
 cat <<EOF >> /etc/php5/mods-available/xdebug.ini
