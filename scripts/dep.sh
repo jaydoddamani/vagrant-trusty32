@@ -21,7 +21,7 @@ apt-get -y upgrade
 export DEBIAN_FRONTEND="noninteractive"
 
 # Installing all the fun things
-apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug php5-gd
+apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug php5-gd php5-imagick supervisor
 
 # Adding some default config for xdebug
 cat <<EOF >> /etc/php5/mods-available/xdebug.ini
@@ -34,6 +34,9 @@ EOF
 
 # Adding the apache user to the vagrant group, so /vagrant can be the docroot
 adduser www-data vagrant
+
+# Adding default ServerName to apache
+sed -i '/ServerRoot "/a ServerName localhost'  /etc/apache2/apache2.conf
 
 # Adding /vagrant as default virtual host
 cat <<EOF > /etc/apache2/sites-available/vagrant.conf

@@ -8,6 +8,7 @@ Current versions at the time of the last commit:
 - MySQL 5.7.9
 - PHP 5.6.15
 - Composer 1.0-dev
+- Supervisor
 
 **Important information**
 
