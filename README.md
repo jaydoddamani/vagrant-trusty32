@@ -6,7 +6,7 @@ Current versions at the time of the last commit:
 
 - Apache 2.4.18
 - MySQL 5.7.10
-- PHP 5.6.16
+- PHP 5.6.17
 - Composer 1.0-dev
 - Supervisor
 
