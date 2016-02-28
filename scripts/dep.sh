@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Adding MySQL repository
-gpg --keyserver keys.gnupg.net --recv-keys 5072E1F5
+gpg --keyserver keys.gnupg.net --recv-keys 8C718D3B5072E1F5
 
 touch /etc/apt/sources.list.d/mysql.list
 
@@ -69,6 +69,10 @@ cat <<EOF > /etc/mysql/conf.d/vagrant.cnf
 [mysqld]
 
 bind-address    = 0.0.0.0
+
+collation-server=utf8mb4_unicode_ci
+init-connect='SET NAMES utf8mb4'
+character-set-server=utf8mb4
 
 EOF
 
