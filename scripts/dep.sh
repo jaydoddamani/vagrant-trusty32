@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# APT update
+rm -rf /var/lib/apt/lists/*
+apt-get -y clean
+apt-get -y update
+
 # Adding MySQL repository
 gpg --keyserver keys.gnupg.net --recv-keys 8C718D3B5072E1F5
 
