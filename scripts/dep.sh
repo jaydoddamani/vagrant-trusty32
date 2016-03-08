@@ -21,7 +21,7 @@ apt-get -y upgrade
 export DEBIAN_FRONTEND="noninteractive"
 
 # Installing all the fun things
-apt-get -y --force-yes install mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug php5-gd php5-imagick supervisor git
+apt-get -y --force-yes install man-db mysql-server mysql-client apache2 php5 php5-mysql php5-mcrypt php5-curl php5-xdebug php5-gd php5-imagick supervisor git
 
 # Adding some default config for xdebug
 cat <<EOF >> /etc/php5/mods-available/xdebug.ini
@@ -43,11 +43,9 @@ cat <<EOF > /etc/apache2/sites-available/vagrant.conf
 
 <VirtualHost *:80>
     DocumentRoot /vagrant
-    <Directory /vagrant/>
+    <Directory /vagrant>
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
-        Order allow,deny
-        allow from all
         Require all granted
     </Directory>
     ErrorLog \${APACHE_LOG_DIR}/error.log
@@ -55,11 +53,41 @@ cat <<EOF > /etc/apache2/sites-available/vagrant.conf
 </VirtualHost>
 EOF
 
+cat <<EOF > /etc/apache2/sites-available/vagrant-ssl.conf
+
+<VirtualHost *:443>
+	DocumentRoot /vagrant
+	ServerName localhost
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	SSLEngine on
+
+	SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem
+	SSLCertificateKeyFile	/etc/ssl/private/ssl-cert-snakeoil.key
+
+	<Directory /vagrant>
+		SSLRequireSSL On
+		SSLVerifyClient optional
+		SSLVerifyDepth 1
+		SSLOptions +StdEnvVars +StrictRequire
+
+		Options -Indexes +FollowSymLinks +MultiViews
+		AllowOverride all
+		Require all granted
+	</Directory>
+</VirtualHost>
+
+EOF
+
 rm -rf /etc/apache2/sites-enabled/*
 
 ln -s /etc/apache2/sites-available/vagrant.conf /etc/apache2/sites-enabled/vagrant.conf
+ln -s /etc/apache2/sites-available/vagrant-ssl.conf /etc/apache2/sites-enabled/vagrant-ssl.conf
 
 a2enmod rewrite
+a2enmod ssl
 
 service apache2 restart
 
