@@ -57,10 +57,9 @@ cat <<EOF > /etc/apache2/sites-available/vagrant-ssl.conf
 
 <VirtualHost *:443>
 	DocumentRoot /vagrant
-	ServerName localhost
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+	ErrorLog \${APACHE_LOG_DIR}/error.log
+	CustomLog \${APACHE_LOG_DIR}/access.log combined
 
 	SSLEngine on
 
