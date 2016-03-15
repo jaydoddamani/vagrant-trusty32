@@ -72,10 +72,7 @@ cat <<EOF > /etc/apache2/sites-available/vagrant-ssl.conf
 	SSLCertificateKeyFile	/etc/ssl/private/ssl-cert-snakeoil.key
 
 	<Directory /vagrant>
-		SSLRequireSSL On
-		SSLVerifyClient optional
-		SSLVerifyDepth 1
-		SSLOptions +StdEnvVars +StrictRequire
+		SSLOptions +StdEnvVars
 
 		Options -Indexes +FollowSymLinks +MultiViews
 		AllowOverride all
