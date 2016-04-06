@@ -30,9 +30,9 @@
             "disk_size": 20480,
             "guest_os_type": "Ubuntu",
             "http_directory": "http",
-            "iso_checksum": "a5c02e25a8f6ab335269adb1a6c176edff075093b90854439b4a90fce9b31f28",
+            "iso_checksum": "e20cf9e0812b52287ca22ac1815bc933c0cfef2be88191110b697d8943bef19e",
             "iso_checksum_type": "sha256",
-            "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.3-server-i386.iso",
+            "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.4-server-i386.iso",
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
             "ssh_port": 22,
@@ -77,7 +77,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.4.3"
+                "version": "0.5.0"
             }
         }]
     ]
