@@ -1,12 +1,12 @@
 # Ubuntu 14.04 LTS Atlas template for LAMP-based development
 
-Ubuntu 14.04.3 (32-bit) LTS with Apache 2.4, MySQL 5.7, PHP 5.6 and Composer. Cloned from https://github.com/Szasza/vagrant-trusty64
+Ubuntu 14.04.4 (32-bit) LTS with Apache 2.4, MySQL 5.7, PHP 5.6 and Composer. Cloned from https://github.com/Szasza/vagrant-trusty64
 
 Current versions at the time of the last commit:
 
 - Apache 2.4.18
 - MySQL 5.7.11
-- PHP 5.6.18
+- PHP 5.6.20
 - Composer 1.0-dev
 - Supervisor
 
